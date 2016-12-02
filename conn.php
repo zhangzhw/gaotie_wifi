@@ -1,21 +1,21 @@
 
 <html>
 <head>
-<title>ä¯ÀÀ±íÖÐ¼ÇÂ¼</title>
+<title>ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¼ï¿½Â¼</title>
 </head>
 <body>
 
 
 <?php
-//Êý¾Ý¿âÁ´½ÓÎÄ¼þ
+//ï¿½ï¿½ï¿½Ý¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½
 
 //error_reporting(0);
-$host='127.0.0.1';//Êý¾Ý¿â·þÎñÆ÷
-$user='root';//Êý¾Ý¿âÓÃ»§Ãû
-$password='';//Êý¾Ý¿âÃÜÂë
-$database='gaotie';//Êý¾Ý¿âÃû
-$conn=@mysql_connect($host,$user,$password) or die('Êý¾Ý¿âÁ¬½ÓÊ§°Ü£¡');
-@mysql_select_db($database) or die('Ã»ÓÐÕÒµ½Êý¾Ý¿â£¡');
+$host='127.0.0.1';//ï¿½ï¿½ï¿½Ý¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+$user='root';//ï¿½ï¿½ï¿½Ý¿ï¿½ï¿½Ã»ï¿½ï¿½ï¿½
+$password='';//ï¿½ï¿½ï¿½Ý¿ï¿½ï¿½ï¿½ï¿½ï¿½
+$database='gaotie';//ï¿½ï¿½ï¿½Ý¿ï¿½ï¿½ï¿½
+$conn=@mysql_connect($host,$user,$password) or die('ï¿½ï¿½ï¿½Ý¿ï¿½ï¿½ï¿½ï¿½ï¿½Ê§ï¿½Ü£ï¿½');
+@mysql_select_db($database) or die('Ã»ï¿½ï¿½ï¿½Òµï¿½ï¿½ï¿½ï¿½Ý¿â£¡');
 mysql_query("set names 'gb2312'");
 
 
@@ -23,15 +23,15 @@ mysql_query("set names 'gb2312'");
 $sql="select * from deceive";
 $result=mysql_query($sql);
 
-echo "<table border=1>";     //Ê¹ÓÃ±í¸ñ¸ñÊ½»¯Êý¾Ý
-echo "<tr><td>ID</td><td>Ê£ÓàÁ÷Á¿</td><td>ÒÑÊ¹ÓÃ</td></tr>";
+echo "<table border=1>";     //Ê¹ï¿½Ã±ï¿½ï¿½ï¿½Ê½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+echo "<tr><td>ID</td><td>å‰©ä½™æµé‡</td><td>å·²ç”¨æµé‡</td></tr>";
 
 while($row=mysql_fetch_array($result))
 {
 	echo "<tr>";
-	echo "<td>".$row['deceive_id']."</td>";   //ÏÔÊ¾ID
-	echo "<td>".$row['left_bandwidth']." </td>";  //ÏÔÊ¾ÐÕÃû
-	echo "<td>".$row['totaluse']." </td>";   //ÏÔÊ¾ÓÊÏä
+	echo "<td>".$row['deceive_id']."</td>";   //ï¿½ï¿½Ê¾ID
+	echo "<td>".$row['left_bandwidth']." </td>";  //ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½
+	echo "<td>".$row['totaluse']." </td>";   //ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½
 	echo "</tr>";
 }
 
