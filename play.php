@@ -1,5 +1,10 @@
+
+
 <!DOCTYPE html>
 <html>
+
+<!-- 当视频播放结束的时候增加流量 -->
+
 <head>
 	<meta charset="UTF-8">
 	<meta name="author" content="Zhangzhiwei">
