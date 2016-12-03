@@ -10,6 +10,9 @@ if(mysqli_connect_errno($con))
 {
 	echo "连接MySQL失败：".mysqli_connect_error();
 }
+mysqli_set_charset($con,"utf8");
+
+
 $sql="select * from device";
 $result=mysqli_query($con, $sql);
 
