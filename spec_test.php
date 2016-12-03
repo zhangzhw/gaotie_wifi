@@ -5,6 +5,7 @@ require 'conn.php';
 // 	echo "\nchenggong";
 // else
 // 	echo "\nshibai";
+echo "1";
 
 $device=exec_select_sql("select * from device where device_id='dec110'");
 echo count($device);
