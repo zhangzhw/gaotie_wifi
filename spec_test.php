@@ -8,7 +8,7 @@ require 'conn.php';
 echo "1";
 
 $device=exec_select_sql("select * from device where device_id='dec110'");
-echo count($device);
-// echo "device_id:".$device[0]["device_id"]." left_bandwidth".$device[0]["left_bandwidth"];
+// echo count($device);
+echo "device_id:".$device[0]["device_id"]." left_bandwidth".$device[0]["left_bandwidth"];
 
 ?>
