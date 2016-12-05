@@ -31,7 +31,7 @@
 		d.add(1,0,'authority','','设备管理 ',"","","","","","","","open");
 		d.add(2,0,'authority','','资源管理 ');
 		
-		d.add(11,1,'authority','','设备流量监控 ',"","","index.php");
+		d.add(11,1,'authority','','设备流量监控 ',"","","bandwidth_query.php");
 		d.add(12,1,'authority','','设备流量权限修改',"","","yhzhgl.php");
 
 		

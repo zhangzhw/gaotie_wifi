@@ -17,7 +17,7 @@
   <frame name="frame_top" src="top.php" scrolling="no" noresize="true" target="frame_main" />
   <frameset cols="179,*">
     <frame id="frame_left" name="frame_left" src="main_left.php" scrolling="auto" target="frame_main" />
-    <frame id="frame_main" name="frame_main" src="a.php" scrolling="yes" target="frame_main" style=" margin-right:5px;" />
+    <frame id="frame_main" name="frame_main" src="welcome.php" scrolling="yes" target="frame_main" style=" margin-right:5px;" />
   </frameset>
 </frameset>
 
