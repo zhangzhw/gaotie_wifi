@@ -6,12 +6,12 @@
 	<title>管理员界面</title>
 
 </head>
-<body>
-	<?php
-// 		require 'conn.php';
-		
-	?>
-</body>
+
+
+<iframe src="main_left.php" name="left" target="right"> 
+</iframe> 
+
+<iframe src="about:blank" name="right"></iframe> 
 
 
 </html>
