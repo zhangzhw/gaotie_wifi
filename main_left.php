@@ -35,8 +35,8 @@
 		d.add(12,1,'authority','','设备流量权限修改',"","","yhzhgl.php");
 
 		
-		d.add(12,2,'authority','','问卷查看 ',"","","xinwentongzhi_add.php?lb=վ������");
-		d.add(13,2,'authority','','问卷上传 ',"","","xinwentongzhi_list.php?lb=վ������");
+		d.add(12,2,'authority','','问卷查看 ',"","","questionnaire_list.php");
+		d.add(13,2,'authority','','问卷上传 ',"","","xinwentongzhi_list.php");
 
 		document.write(d);
 		
