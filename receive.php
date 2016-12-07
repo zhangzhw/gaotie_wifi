@@ -5,7 +5,7 @@ if ($_SERVER['REQUEST_METHOD']=='POST')
 	$post_data = file_get_contents('php://input');
 	$data = json_decode($post_data, true);
 
-	if($data["type"]==1)
+	if($data["type"]==1)//首次接入的时候给予流量
 	{
 		$device_id=$data["device_id"];
 		$past_use=$data["past_use"];
@@ -28,6 +28,17 @@ if ($_SERVER['REQUEST_METHOD']=='POST')
 			echo json_encode($ret);
 		}
 	}
+	elseif ($data["type"]==2)//获取任务列表
+	{
+		$device_id=$data["device_id"];
+		
+		$sql="select * from task_table where task_id not in (select task_id from task_done where device_id='".$device_id."')";
+		$result=exec_select_sql($sql);
+		echo json_encode($result);
+		
+	}
+	
+	
 }
 
 
