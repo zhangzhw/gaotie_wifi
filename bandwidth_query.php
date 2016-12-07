@@ -8,13 +8,14 @@
 
 <body>
 <p>已接入设备</p>
-<table width="100%" border="1" align="center" cellpadding="3" cellspacing="1" bordercolor="#00FFFF" style="border-collapse:collapse">  
+<table   border="1" align="center" cellpadding="3" cellspacing="1" bordercolor="#00FFFF" style="width:100%;border-collapse:collapse">  
   <tr>
     <td bgcolor="A4B6D7">序号</td>
     <td bgcolor="A4B6D7">设备号</td>
     <td bgcolor="A4B6D7">剩余流量</td>
     <td bgcolor="A4B6D7">总共使用流量</td>
     <td bgcolor="A4B6D7">权限等级</td>
+    <td bgcolor="A4B6D7">操作</td>
   </tr>
  
   <?php
@@ -30,6 +31,7 @@
     <td><?php echo $result[$i]["left_bandwidth"]; ?></td>
     <td><?php echo $result[$i]["totaluse"]; ?></td>
     <td><?php echo $result[$i]["permission"] ?></td>
+    <td><a href=<?php echo "bandwidth_upt.php?device_id=".$result[$i]["device_id"]?> style="text-decoration:none;color:#000">修改</a></td>
   </tr>
   <?php
   	}
