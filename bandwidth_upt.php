@@ -12,6 +12,7 @@ if (is_array($_POST)&&count($_POST)>0)
 	$sql="update device  set left_bandwidth=".$_POST["left_bandwidth"].",permission=".$_POST["permission"]." where device_id='".$device_id."'";
 	exec_upt_sql($sql) ;
 	echo "<script>javascript:alert('修改成功!');location.href='bandwidth_query.php';</script>";
+	//'bandwidth_upt.php?device_id='".$device_id.";</script>";
 }
 $sql="select * from device where device_id='".$device_id."'";
 $result=exec_select_sql($sql);

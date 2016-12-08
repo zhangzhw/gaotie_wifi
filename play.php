@@ -1,19 +1,35 @@
+<?php
+require_once 'conn.php';
+$video_name;
+$id;
+$type;
+$sql;
+if (is_array($_GET)&&count($_GET)>0)
+{
+	$id=$_GET["id"];
+	$video_name=$_GET["name"];
+	$type=$_GET["type"];
+	if($type==1)
+		$sql="select * from ad_table where task_id=".$id;
+	else
+		$sql="select * from resoure_tb where res_id=".$id;
+}
 
+$result=exec_select_sql($sql);
+$url=$result[0]["url"];
+?>
 
 <!DOCTYPE html>
 <html>
-
-<!-- 当视频播放结束的时候增加流量 -->
-
 <head>
 	<meta charset="UTF-8">
 	<meta name="author" content="Zhangzhiwei">
-	<title>媒体播放</title>
+	<title>查看视频</title>
 </head>
 <body>
 <div style="text-align:center">
-	<h1>公益广告</h1>
-	<video src="laji.mp4" controls="controls" >
+	<h1><?php echo $video_name;?></h1>
+	<video src=<?php echo $url;?> controls="controls" >
 	你的浏览器不支持
 	</video>
 </div>

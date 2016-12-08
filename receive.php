@@ -31,11 +31,9 @@ if ($_SERVER['REQUEST_METHOD']=='POST')
 	elseif ($data["type"]==2)//获取任务列表
 	{
 		$device_id=$data["device_id"];
-		
 		$sql="select * from task_table where task_id not in (select task_id from task_done where device_id='".$device_id."')";
 		$result=exec_select_sql($sql);
 		echo json_encode($result);
-		
 	}
 	
 	

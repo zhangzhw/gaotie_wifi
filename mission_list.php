@@ -1,38 +1,54 @@
 <html>
 <head>
-	<meta charset="UTF-8">
-	<meta name="author" content="Zhangzhiwei">
-	<title>任务列表</title>
-
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>任务查询</title>
+<?php require_once 'conn.php'; ?>
 </head>
+
 <body>
-<div>
-	<h2>问卷任务</h2>
-	<ol>
-		<li><a href="play.php">公益广告</a></li>
-	
-	
-	</ol>
-</div>
-<div>
-	<h2>广告任务</h2>
-	<div style="width:400px;height:100px;overflow:auto">
-	<ol>
-		<li><a href="play.php">公益广告1</a></li>
-		<li><a href="play.php">公益广告2</a></li>
-		<li><a href="play.php">公益广告3</a></li>
-		<li><a href="play.php">公益广告4</a></li>
-		<li><a href="play.php">公益广告5</a></li>
-		<li><a href="play.php">公益广告6</a></li>
-		<li><a href="play.php">公益广告7</a></li>
-		<li><a href="play.php">公益广告8</a></li>
-	
-	</ol>
-	</div>
+<p>已接入设备</p>
+<table   border="1" align="center" cellpadding="3" cellspacing="1" bordercolor="#00FFFF" style="width:100%;border-collapse:collapse">  
+  <tr>
+    <td bgcolor="A4B6D7">序号</td>
+    <td bgcolor="A4B6D7">任务编号号</td>
+    <td bgcolor="A4B6D7">任务类型</td>
+    <td bgcolor="A4B6D7">任务名</td>
+    <td bgcolor="A4B6D7">奖励流量</td>
+    <td bgcolor="A4B6D7">奖励权限</td>
+    
+    <td bgcolor="A4B6D7">操作</td>
+  </tr>
+ 
+  <?php
+	  $sql="select * from task_table";
+	  $result=exec_select_sql($sql);
+	  $rowscount=count($result);
+	 for($i=0;$i<$rowscount;$i++)
+	 {
+  ?>
+  <tr>
+    <td><?php echo $i+1; ?></td>
+    <td><?php echo $result[$i]["task_id"]; ?></td>
+    <td><?php if($result[$i]["type"]==1)
+    		echo "问卷";
+    	else
+    		echo "公益广告";?>
+    </td>
+    <td><?php echo $result[$i]["task_name"]; ?></td>
+    <td><?php echo $result[$i]["bandwidth"] ?></td>
+    <td><?php echo $result[$i]["priority"] ?></td>
+    <td><a href=<?php if($result[$i]["type"]==1)
+    				echo "questionnaire_list.php?task_id=".$result[$i]["task_id"]."&task_name=".$result[$i]["task_name"];
+    			else if ($result[$i]["type"]==2)
+    				echo "play.php?id=".$result[$i]["task_id"]."&name=".$result[$i]["task_name"]."&type=1";
 
-
-</div>
-
+    			?> style="text-decoration:none;color:#000">查看</a>
+    </td>
+  </tr>
+  <?php
+  	}
+  ?>
+</table>
 
 
 </body>

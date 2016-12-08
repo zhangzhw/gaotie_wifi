@@ -34,12 +34,15 @@
 		d.add(11,1,'authority','','设备流量监控 ',"","","bandwidth_query.php");
 		d.add(12,1,'authority','','历史接入设备查看',"","","yhzhgl.php");
 
-		
-		d.add(12,2,'authority','','问卷查看 ',"","","questionnaire_list.php");
-		d.add(13,2,'authority','','问卷上传 ',"","","xinwentongzhi_list.php");
+		d.add(11,2,'authority','','任务管理 ',"","","mission_list.php");
+		d.add(12,2,'authority','','任务添加 ',"","","mission_add.php");
+		d.add(13,2,'authority','','资源管理 ',"","","resource_list.php");
+		d.add(14,2,'authority','','资源上传 ',"","","resource_up.php");
 
 		document.write(d);
 		
 	</script>
+	</div>
+	</div>
 </body>
 </html>

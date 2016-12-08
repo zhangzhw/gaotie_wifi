@@ -62,7 +62,7 @@ function go(){
 <?php
 if($over==1)
 {
-	echo $_SESSION["device_id"]."欢迎参加本次调查问卷，您已获得流量".$_SESSION["bandwith"]."B，你的权限已提高".$_SESSION["priority"]."个等级";
+	echo $_SESSION["device_id"]."欢迎参加本次调查问卷，您已获得流量".$_SESSION["bandwidth"]."B，你的权限已提高".$_SESSION["priority"]."个等级";
 	$insert_data=$_SESSION["insert_data"];
 	$timestamp=time();
 	$sql="";
@@ -79,7 +79,7 @@ if($over==1)
 	}
 	exec_upt_sql($sql) ;
 	
-	$sql="update device set left_bandwidth=left_bandwidth+".$_SESSION["bandwith"].",permission=permission+".$_SESSION["priority"]." where device_id='".$_SESSION["device_id"]."'";
+	$sql="update device set left_bandwidth=left_bandwidth+".$_SESSION["bandwidth"].",permission=permission+".$_SESSION["priority"]." where device_id='".$_SESSION["device_id"]."'";
 	exec_upt_sql($sql) ;
 	
 	
@@ -94,7 +94,7 @@ if($over==1)
 	unset($_SESSION["task_name"]);
 	unset($_SESSION["device_id"]);
 	unset($_SESSION["priority"]);
-	unset($_SESSION["bandwith"]);
+	unset($_SESSION["bandwidth"]);
 	
 }
 else
@@ -110,7 +110,7 @@ else
 	$task_type=$data[$index]["type"];
 	if($task_type!="文本框")
 	{
-		$sql="select * from subject where task_id=".$task_id." and subject_id=".$subject_id." order by 'option'";
+		$sql="select * from subject where task_id=".$task_id." and subject_id=".$subject_id." order by option_id";
 		$subject=exec_select_sql($sql);
 	}	
 ?>
@@ -141,7 +141,7 @@ else
 				{?>
 					<tr class="duoxuan">
 						<td>
-							<input type="checkbox" name="checkbox[]" id=<?php echo $subject[$i]["option"];?> value=<?php echo $subject[$i]["option"];?> />
+							<input type="checkbox" name="checkbox[]" id=<?php echo $subject[$i]["option_id"];?> value=<?php echo $subject[$i]["option_id"];?> />
 							<?php echo $subject[$i]["option_detail"]?>
 						</td>
 					</tr>
@@ -154,7 +154,7 @@ else
 				{?>
 					<tr class="danxuan">
 						<td>
-							<input type="radio" name="radio" id=<?php echo $subject[$i]["option"];?> value=<?php echo $subject[$i]["option"];?> />
+							<input type="radio" name="radio" id=<?php echo $subject[$i]["option_id"];?> value=<?php echo $subject[$i]["option_id"];?> />
 							<?php echo $subject[$i]["option_detail"]?>
 						</td>
 					</tr>
