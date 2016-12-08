@@ -14,11 +14,22 @@ $result=exec_select_sql($sql);
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>问卷详情</title>
+
+
+
 </head>
 <body>
 <table   width="100%" height="103" border="1" cellpadding="0" cellspacing="0" bordercolor="#F8C878">
 <tr>
-<td  colspan="5" style="text-align: center"><?php echo $task_name;?></td>
+<td  colspan="6" style="text-align: center"><?php echo $task_name;?></td>
+</tr>
+<tr>
+	<td  style="width: 10%">序号</td>
+	<td  style="width: 20%">题目</td>
+	<td  style="width: 20%">题目类型</td>
+	<td>选项</td>
+	<td>统计数据</td>
+	<td>操作</td>
 </tr>
 <?php 
 for($i=0;$i<count($result);$i++)
@@ -69,6 +80,9 @@ for($i=0;$i<count($result);$i++)
 	
 	?>
 	</td>
+	<td>
+	<a href=<?php echo "questionnaire_del.php?task_id=".$task_id."&subject_id=".$result[$i]["subject_id"]."&task_name=".$task_name;?> onclick="return confirm('确认删除吗？')" style="text-decoration:none;color:#000">删除</a>
+	</td>
 	
 	
 </tr>
@@ -77,9 +91,10 @@ for($i=0;$i<count($result);$i++)
 }
 ?>
 
+
 </table>
 
-
+<a href=<?php echo "questionnaire_add.php?task_id=".$task_id."&task_name=".$task_name;?>>添加选项</a>
 
 
 </body>

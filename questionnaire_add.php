@@ -12,6 +12,7 @@ if (is_array($_POST)&&count($_POST)>0)
 {
 	$sql="select subject_id from questionnaire where task_id=".$task_id;
 	$result=exec_select_sql($sql);
+	$id_new=0;
 	$id_new=$result[0]["subject_id"];
 	for ($i=1;$i<count($result);$i++)
 	{
@@ -97,7 +98,7 @@ $(document).ready(function(){
 <table width="100%" border="1" align="center" cellpadding="3" cellspacing="1" bordercolor="#00FFFF" style="border-collapse:collapse">
 <tr><td colspan="2" style="text-align: center"><?php echo $task_name;?></td></tr>
 <tr>
-	<td>请选择添加的试题类型</td>
+	<td style="width: 10%">请选择添加的试题类型</td>
 	<td>
 		<select id="type">
 		<option value="单选题">单选题</option>
@@ -109,6 +110,7 @@ $(document).ready(function(){
 <tr>
 <td colspan="2">
 <button id="bt1">确定</button>
+<button onclick=<?php echo "javascript:location.href='questionnaire_list.php?task_id=".$task_id."&task_name=".$task_name."'";?>>查看问卷列表</button>
 </td>
 </tr>
 </table>
@@ -155,11 +157,16 @@ $(document).ready(function(){
 <form action=<?php echo "questionnaire_add.php?ctype=2&task_id=".$task_id."&task_name=".$task_name;?>  id="form2" method="post">
 <table width="100%" border="1" align="center" cellpadding="3" cellspacing="1" bordercolor="#00FFFF" style="border-collapse:collapse"> 
 <tr><td>题目内容</td><td><input name="subject_name" type="text"></td></tr>
-<tr><td><input type="submit" id="bt3" value="添加"></td></tr>
+<tr>
+<td>
+<input type="submit" id="bt3" value="添加">
+</td>
+
+</tr>
 </table>
 </form>
 <p>以下是已有题目列表</p>
-<iframe src=<?php echo "questionnaire_list.php?task_id=".$task_id."&task_name=".$task_name ;?> style="width: 100%" frameborder="0"></iframe>
+<iframe src=<?php echo "questionnaire_show.php?task_id=".$task_id."&task_name=".$task_name ;?> style="width: 100% ;height:1000" frameborder="0"></iframe>
 
 
 

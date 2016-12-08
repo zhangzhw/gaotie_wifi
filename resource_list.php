@@ -31,6 +31,8 @@
     	<a href=<?php echo "play.php?id=".$result[$i]["res_id"]."&name=".$result[$i]["res_name"]."&type=2";?> style="text-decoration:none;color:#000">查看</a>
     	&nbsp;
     	<a href=<?php echo "resource_upt.php?id=".$result[$i]["res_id"];?> style="text-decoration:none;color:#000">修改</a>
+    	&nbsp;
+    	<a href=<?php echo "resource_del.php?res_id=".$result[$i]["res_id"];?> onclick="return confirm('确认删除吗？')" style="text-decoration:none;color:#000">删除</a>
     </td>
   </tr>
   <?php

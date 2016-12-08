@@ -37,12 +37,17 @@
     <td><?php echo $result[$i]["task_name"]; ?></td>
     <td><?php echo $result[$i]["bandwidth"] ?></td>
     <td><?php echo $result[$i]["priority"] ?></td>
-    <td><a href=<?php if($result[$i]["type"]==1)
+    <td>
+    	<a href=<?php if($result[$i]["type"]==1)
     				echo "questionnaire_list.php?task_id=".$result[$i]["task_id"]."&task_name=".$result[$i]["task_name"];
     			else if ($result[$i]["type"]==2)
     				echo "play.php?id=".$result[$i]["task_id"]."&name=".$result[$i]["task_name"]."&type=1";
 
     			?> style="text-decoration:none;color:#000">查看</a>
+    	&nbsp;
+    	<a href=<?php echo "mission_upt.php?task_id=".$result[$i]["task_id"];?>  style="text-decoration:none;color:#000">修改</a>
+    	&nbsp;
+    	<a href=<?php echo "mission_del.php?task_id=".$result[$i]["task_id"]."&type=".$result[$i]["type"];?> onclick="return confirm('确认删除吗？')" style="text-decoration:none;color:#000">删除</a>
     </td>
   </tr>
   <?php
