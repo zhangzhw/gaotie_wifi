@@ -81,7 +81,8 @@ if($over==1)
 	
 	$sql="update device set left_bandwidth=left_bandwidth+".$_SESSION["bandwidth"].",permission=permission+".$_SESSION["priority"]." where device_id='".$_SESSION["device_id"]."'";
 	exec_upt_sql($sql) ;
-	
+	$sql="insert into task_done values(".$insert_data[0]["task_id"].",'".$_SESSION["device_id"]."')";
+	exec_upt_sql($sql) ;
 	
 	if(isset($_SESSION["task_name"]))
 	{
@@ -99,10 +100,6 @@ if($over==1)
 }
 else
 {
-// 	if(isset($_SESSION["insert_data"]))
-// 	{
-// 		print_r($_SESSION["insert_data"]);
-// 	}
 	
 	$subject_name=$data[$index]["subject_name"];
 	$subject_id=$data[$index]["subject_id"];

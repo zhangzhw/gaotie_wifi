@@ -12,6 +12,7 @@
   <tr>
     <td bgcolor="A4B6D7">序号</td>
     <td bgcolor="A4B6D7">设备号</td>
+    <td bgcolor="A4B6D7">状态</td>
     <td bgcolor="A4B6D7">剩余流量</td>
     <td bgcolor="A4B6D7">总共使用流量</td>
     <td bgcolor="A4B6D7">权限等级</td>
@@ -19,7 +20,7 @@
   </tr>
  
   <?php
-	  $sql="select * from device";
+	  $sql="select * from device order by ison desc";
 	  $result=exec_select_sql($sql);
 	  $rowscount=count($result);
 	 for($i=0;$i<$rowscount;$i++)
@@ -28,6 +29,11 @@
   <tr>
     <td><?php echo $i+1; ?></td>
     <td><?php echo $result[$i]["device_id"]; ?></td>
+    <td><?php 	if($result[$i]["ison"]==1)
+    				echo "在线";
+    			else
+    				echo "离线";
+    	?></td>
     <td><?php echo $result[$i]["left_bandwidth"]; ?></td>
     <td><?php echo $result[$i]["totaluse"]; ?></td>
     <td><?php echo $result[$i]["permission"] ?></td>
