@@ -1,6 +1,7 @@
 <?php 
 require_once 'conn.php';
-
+require_once 'api/get_methods.php';
+require_once 'api/put_func.php';
 $device_id;
 $result;
 if (is_array($_GET)&&count($_GET)>0)
@@ -10,12 +11,26 @@ if (is_array($_GET)&&count($_GET)>0)
 if (is_array($_POST)&&count($_POST)>0)
 {
 	$sql="update device  set left_bandwidth=".$_POST["left_bandwidth"].",permission=".$_POST["permission"]." where device_id='".$device_id."'";
-	exec_upt_sql($sql) ;
+	//exec_upt_sql($sql);
+  //$result=exec_select_sql($sql);
+  //******************* sql to api  *******************//
+  $temp = search_recorder('Device_table', 'device_id', $device_id);
+  $result = $temp[0];
+
+  $url = 'http:/120.77.42.242:8080/Entity/U9527f52303e3e/gt/Device_table';
+  $result['left_bandwidth'] = (int)$_POST["left_bandwidth"];
+  $result['permission'] = (int)$_POST["permission"];
+
+  $output = put_fun($url,$result['id'],$result);
+
 	echo "<script>javascript:alert('修改成功!');location.href='bandwidth_query.php';</script>";
 	//'bandwidth_upt.php?device_id='".$device_id.";</script>";
 }
 $sql="select * from device where device_id='".$device_id."'";
-$result=exec_select_sql($sql);
+//$result=exec_select_sql($sql);
+$result = search_recorder('Device_table', 'device_id', $device_id);
+//var_dump($result);
+
 ?>
 
 <html>

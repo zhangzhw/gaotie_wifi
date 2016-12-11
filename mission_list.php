@@ -2,7 +2,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>任务查询</title>
-<?php require_once 'conn.php'; ?>
+<?php require_once 'conn.php'; 
+  require_once 'api/get_methods.php';
+?>
 </head>
 
 <body>
@@ -21,7 +23,19 @@
  
   <?php
 	  $sql="select * from task_table";
-	  $result=exec_select_sql($sql);
+	  //$result=exec_select_sql($sql);
+    //******************* sql to api  *******************//
+    $table = 'Task_table';
+    $temp = get_table($table);
+    //SORT_DESC
+    $arrSort = array();  
+    foreach($temp AS $uniqid => $row)  
+        foreach($row AS $key=>$value) 
+          $arrSort[$key][$uniqid] = $value;  
+    array_multisort($arrSort['task_id'], SORT_ASC,$temp); //排序顺序标志 SORT_DESC 降序；SORT_ASC 升序  
+    $result = $temp;
+
+
 	  $rowscount=count($result);
 	 for($i=0;$i<$rowscount;$i++)
 	 {

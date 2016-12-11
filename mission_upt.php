@@ -1,5 +1,7 @@
 <?php 
 require_once 'conn.php';
+require_once 'api/get_methods.php';
+require_once 'api/put_func.php';
 
 $task_id;
 if (is_array($_GET)&&count($_GET)>0)
@@ -9,13 +11,24 @@ if (is_array($_GET)&&count($_GET)>0)
 if (is_array($_POST)&&count($_POST)>0)
 {
 	$sql="update task_table  set task_name='".$_POST["task_name"]."',bandwidth=".$_POST["bandwidth"].",priority=".$_POST["priority"]." where task_id=".$task_id;
-	if(exec_upt_sql($sql))
-		echo "<script>javascript:alert('修改成功!');location.href='mission_list.php';</script>";
-	else
-		echo "<script>javascript:alert('修改失败!');location.href='mission_list.php';</script>";
+	//******************* sql to api  *******************//
+  $temp = search_recorder('Task_table', 'task_id', $task_id);
+  $result = $temp[0];
+
+  $url = 'http:/120.77.42.242:8080/Entity/U9527f52303e3e/gt/Task_table';
+  $result['task_name'] = $_POST["task_name"];
+  $result['bandwidth'] = (int)$_POST["bandwidth"];
+  $result['priority'] = (int)$_POST["priority"];
+
+  $output = put_fun($url,$result['id'],$result);
+
+  echo "<script>javascript:alert('修改成功!');location.href='mission_list.php';</script>";
+
 }
 $sql="select * from task_table where task_id=".$task_id;
-$result=exec_select_sql($sql);
+//$result=exec_select_sql($sql);
+//******************* sql to api  *******************//
+$result = search_recorder('Task_table', 'task_id', $task_id);
 ?>
 
 <html>

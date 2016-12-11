@@ -1,5 +1,7 @@
 <?php 
 require_once 'conn.php';
+require_once 'api/put_func.php';
+require_once 'api/get_methods.php';
 
 $res_id;
 if (is_array($_GET)&&count($_GET)>0)
@@ -9,11 +11,24 @@ if (is_array($_GET)&&count($_GET)>0)
 if (is_array($_POST)&&count($_POST)>0)
 {
 	$sql="update resoure_tb  set res_name='".$_POST["res_name"]."',priority=".$_POST["priority"]." where res_id='".$res_id."'";
-	exec_upt_sql($sql) ;
+	//exec_upt_sql($sql) ;
+  //******************* sql to api  *******************//
+  $temp = search_recorder('Resoure_tb', 'res_id', $res_id);
+  $result = $temp[0];
+
+  $url = 'http:/120.77.42.242:8080/Entity/U9527f52303e3e/gt/Resoure_tb';
+  $result['res_name'] = $_POST["res_name"];
+  $result['priority'] = (int)$_POST["priority"];
+
+  $output = put_fun($url,$result['id'],$result);
+
 	echo "<script>javascript:alert('修改成功!');location.href='resource_list.php';</script>";
 }
 $sql="select * from resoure_tb where res_id=".$res_id;
-$result=exec_select_sql($sql);
+//$result=exec_select_sql($sql);
+//******************* sql to api  *******************//
+$result = search_recorder('Resoure_tb', 'res_id', $res_id);
+
 ?>
 
 <html>

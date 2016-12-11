@@ -2,7 +2,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>资源列表</title>
-<?php require_once 'conn.php'; ?>
+<?php require_once 'conn.php'; 
+  require_once 'api/get_methods.php';
+?>
 </head>
 
 <body>
@@ -18,7 +20,11 @@
  
   <?php
 	  $sql="select * from resoure_tb";
-	  $result=exec_select_sql($sql);
+	  //$result=exec_select_sql($sql);
+    //******************* sql to api  *******************//
+    $table = 'Resoure_tb';
+    $result = get_table($table);
+
 	  $rowscount=count($result);
 	 for($i=0;$i<$rowscount;$i++)
 	 {
