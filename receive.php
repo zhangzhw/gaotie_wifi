@@ -8,7 +8,7 @@ if ($_SERVER['REQUEST_METHOD']=='POST')
 {
 	$post_data = file_get_contents('php://input');
 	$data = json_decode($post_data, true);
-	if($data["type"]==1)//首次接入的时候给予流量，及以后每次查询流量和权限
+	if($data["type"]==1)//首次接入的时候给予流量，及以后每次查询流量和权限        {"type":"3","device_id":"knimei","past_use":"120"}
 	{
 		$device_id=$data["device_id"];
 		$past_use=$data["past_use"];
@@ -44,11 +44,10 @@ if ($_SERVER['REQUEST_METHOD']=='POST')
 			//exec_upt_sql($sql);
 			//******************* sql to api  *******************//
 			$url = 'http:/120.77.42.242:8080/Entity/U9527f52303e3e/gt/Device_table';
-
-			$data = array("device_id" => $device_id, "left_bandwidth" => (int)$ret["left_bandwidth"], "toaluse" => 0, "permission" => 0, "ison" => 1);
-
+			$data = array("device_id" => $device_id, "left_bandwidth" => (int)$ret["left_bandwidth"], "totaluse" => (int)0, "permission" => (int)0, "ison" => (int)1);	
 			$output = post_fun($url,$data);
-
+			
+			
 			echo json_encode($ret);
 		}
 	}
@@ -66,26 +65,26 @@ if ($_SERVER['REQUEST_METHOD']=='POST')
 
 		
 		
-    	foreach($task AS $uniqid => $row)  {
-    		if(!in_array($row['task_id'], $done){
-    			$result[] = $row;
-    		}    		
-    	}
+//     	foreach($task AS $uniqid => $row)  
+//     	{
+//     		if(!in_array($row['task_id'], $done){
+//     			$result[]=$row;
+//     		}    		
+//     	}
 
 		echo json_encode($result);
 	}
-	elseif($data["type"]==3)//广告地址
+	elseif($data["type"]==3)//广告地址              {"type":"3","task_id":3}
 	{
 		$task_id=$data["task_id"];
 		$sql="select url from ad_table where task_id=".$task_id;
 		//$result=exec_select_sql($sql);
     	//******************* sql to api  *******************//
-   		$table = 'Ad_table';
-    	$temp = get_table($table);
+		$result = search_recorder('Ad_table', 'task_id', $task_id);
 
 		echo json_encode($result);
 	}
-	elseif($data["type"]==4)//获取资源列表及其地址
+	elseif($data["type"]==4)//获取资源列表及其地址   
 	{
 		$sql="select * from resoure_tb";
 		//$result=exec_select_sql($sql);
@@ -111,7 +110,7 @@ if ($_SERVER['REQUEST_METHOD']=='POST')
 		$sql="select * from device where device_id='".$device_id."'";
 		//$res=exec_select_sql($sql);
 		//******************* sql to api  *******************//
-		$res = search_recorder('Device_table', 'device_id', $_POST["device_id"];
+		$res = search_recorder('Device_table', 'device_id', $_POST["device_id"]);
 
 		$ret=array("left_bandwidth"=>"0","permission"=>"0");
 
