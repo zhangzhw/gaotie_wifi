@@ -48,7 +48,7 @@ for($i=0;$i<count($result);$i++)
    		$arrSort = array();  
     	foreach($temp AS $uniqid => $row)  
         	foreach($row AS $key=>$value) 
-          	$arrSort[$key][$uniqid] = $value;  
+          		$arrSort[$key][$uniqid] = $value;  
     	array_multisort($arrSort['option_id'], SORT_ASC,$temp); //排序顺序标志 SORT_DESC 降序；SORT_ASC 升序  
    		//$subject = $temp;
     }

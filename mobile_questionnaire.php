@@ -1,5 +1,10 @@
 <?php
 require_once 'conn.php';
+require_once 'api/get_methods.php';
+require_once 'api/post_func.php';
+require_once 'api/put_func.php';
+
+
 session_start();
 $index=0;
 $data;
@@ -78,11 +83,30 @@ if($over==1)
 		}
 	}
 	exec_upt_sql($sql) ;
+
+	
 	
 	$sql="update device set left_bandwidth=left_bandwidth+".$_SESSION["bandwidth"].",permission=permission+".$_SESSION["priority"]." where device_id='".$_SESSION["device_id"]."'";
-	exec_upt_sql($sql) ;
+	//exec_upt_sql($sql) ;
+			//******************* sql to api  *******************//
+  			$temp = search_recorder('Device_table', 'device_id', $device_id);
+  			$result = $temp[0];
+
+  			$url = 'http:/120.77.42.242:8080/Entity/U9527f52303e3e/gt/Device_table';
+  			$result['left_bandwidth'] += (int)$_SESSION["bandwidth"];
+  			$result['permission'] += (int)$permission;
+
+  			$output = put_fun($url,$result['id'],$result);
+
 	$sql="insert into task_done values(".$insert_data[0]["task_id"].",'".$_SESSION["device_id"]."')";
 	exec_upt_sql($sql) ;
+			//******************* sql to api  *******************//
+			$url = 'http:/120.77.42.242:8080/Entity/U9527f52303e3e/gt/Task_done';
+
+			$data = array("task_id" => $insert_data[0]["task_id"], "device_id" => $_SESSION["device_id"]);
+
+			$output = post_fun($url,$data);
+
 	
 	if(isset($_SESSION["task_name"]))
 	{
