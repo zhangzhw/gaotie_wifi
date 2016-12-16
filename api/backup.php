@@ -5,7 +5,7 @@ require_once "get_func.php";
 require_once "post_func.php";
 require_once "delete_func.php";
 
-function backup_all($source_url,$dest_url){//
+function backup($source_url,$dest_url){//
 	if($source_url == null || $dest_url == null)
 		return 0;	
 	//echo $url;

@@ -63,14 +63,21 @@ if ($_SERVER['REQUEST_METHOD']=='POST')
 
 		$result;
 
+	function isinArray($data, $array, $col){ 
+      foreach($array AS $uniqid => $row)  {
+        if($row[$col] == $data[$col]){
+          return 1;
+        }     
+      }
+      return 0;
+	}	
 		
-		
-//     	foreach($task AS $uniqid => $row)  
-//     	{
-//     		if(!in_array($row['task_id'], $done){
-//     			$result[]=$row;
-//     		}    		
-//     	}
+     	foreach($task AS $uniqid => $row)  
+     	{
+     		if(!isinArray($row, $done, 'task_id'){
+     			$result[]=$row;
+     		}    		
+     	}
 
 		echo json_encode($result);
 	}

@@ -4,11 +4,37 @@ require_once 'api/get_methods.php';
 require_once 'api/put_func.php';
 
 
-    $url = 'http:/120.77.42.242:8080/Entity/U9527f52303e3e/gt/Questionnaire';
     $data = array("task_id" => 21, "subject_id" => 3, "subject_name" => "zhognwen", "subject_type" => "danxuanti");
-    var_dump($data);
-        $output = post_fun($url,$data);
-    var_dump($output);
+
+    $done= array( 
+          array("task_id" => 21, "subject_id" => 3, "subject_name" => "zhognwen", "subject_type" => "danxuanti"),
+          array("task_id" => 23, "subject_id" => 3, "subject_name" => "zhognwen", "subject_type" => "danxuanti"),
+          array("task_id" => 24, "subject_id" => 3, "subject_name" => "zhognwen", "subject_type" => "danxuanti"),
+          array("task_id" => 25, "subject_id" => 3, "subject_name" => "zhognwen", "subject_type" => "danxuanti"),
+          array("task_id" => 26, "subject_id" => 3, "subject_name" => "zhognwen", "subject_type" => "danxuanti"),
+    );
+    var_dump($done);
+    var_dump($done[1]);
+    var_dump($done[2]);
+
+    $arr = array(
+array('id'=>1,'xuefei'=>'50万以下'),
+array('id'=>2,'xuefei'=>'51万~60万'),
+array('id'=>3,'xuefei'=>'61万~70万'),
+array('id'=>4,'xuefei'=>'71万~80万'),
+array('id'=>5,'xuefei'=>'81万~90万'),
+array('id'=>6,'xuefei'=>'90万以上')
+  );
+
+    var_dump($arr);
+
+//      foreach($task AS $uniqid => $row)  {
+        //if(!in_array($data['task_id'], $done){
+          echo "yes";
+       // }       
+//      }
+
+
 
 /*
   $temp = search_recorder('Device_table', 'device_id', 'dec110');
