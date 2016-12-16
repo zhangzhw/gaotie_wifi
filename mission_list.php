@@ -8,7 +8,7 @@
 </head>
 
 <body>
-<p>已接入设备</p>
+<p>已有任务</p>
 <table   border="1" align="center" cellpadding="3" cellspacing="1" bordercolor="#00FFFF" style="width:100%;border-collapse:collapse">  
   <tr>
     <td bgcolor="A4B6D7">序号</td>

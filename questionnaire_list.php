@@ -85,7 +85,6 @@ for($i=0;$i<count($result);$i++)
 				$chose_num++;
 			}
 		}
-		$final_index[]=$subject[$j]["option_id"];
 		$final_num[]=$chose_num;
 		
 	}
@@ -93,15 +92,20 @@ for($i=0;$i<count($result);$i++)
 	</td>
 	<td>
 	<?php 
-	for($j=0;$j<count($final_index);$j++)
+// 	for($j=0;$j<count($final_index);$j++)
+// 	{
+// 		echo $final_index[$j]."有".$final_num[$j]."人选择";
+// 		if($j<count($final_index)-1)
+// 			echo "<br />";
+// 	}
+	if(count($final_num)>0)
 	{
-		echo $final_index[$j]."有".$final_num[$j]."人选择";
-		if($j<count($final_index)-1)
-			echo "<br />";
-	}
-	
-	
 	?>
+	<img alt="error" src=<?php echo "draw.php?final=".json_encode($final_num);?>> 
+	<?php 
+	}
+	?>
+	
 	</td>
 	<td>
 	<a href=<?php echo "questionnaire_del.php?task_id=".$task_id."&subject_id=".$result[$i]["subject_id"]."&task_name=".$task_name;?> onclick="return confirm('确认删除吗？')" style="text-decoration:none;color:#000">删除</a>
