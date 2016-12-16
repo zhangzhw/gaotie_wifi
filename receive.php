@@ -91,7 +91,7 @@ if ($_SERVER['REQUEST_METHOD']=='POST')
 
 		echo json_encode($result);
 	}
-	elseif($data["type"]==4)//获取资源列表及其地址   
+	elseif($data["type"]==4)//获取资源列表及其地址 
 	{
 		$sql="select * from resoure_tb";
 		//$result=exec_select_sql($sql);
