@@ -74,7 +74,8 @@ if ($_SERVER['REQUEST_METHOD']=='POST')
 		
      	foreach($task AS $uniqid => $row)  
      	{
-     		if(!isinArray($row, $done, 'task_id'){
+     		if(!isinArray($row, $done, 'task_id'))
+     		{
      			$result[]=$row;
      		}    		
      	}
