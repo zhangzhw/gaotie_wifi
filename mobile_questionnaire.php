@@ -99,7 +99,7 @@ if($over==1)
 	$sql="update device set left_bandwidth=left_bandwidth+".$_SESSION["bandwidth"].",permission=permission+".$_SESSION["priority"]." where device_id='".$_SESSION["device_id"]."'";
 	//exec_upt_sql($sql) ;
 			//******************* sql to api  *******************//
-  			$temp = search_recorder('Device_table', 'device_id', $device_id);
+  			$temp = search_recorder('Device_table', 'device_id', $_SESSION["device_id"]);
   			$result = $temp[0];
 
   			$url = 'http:/120.77.42.242:8080/Entity/U9527f52303e3e/gt/Device_table';

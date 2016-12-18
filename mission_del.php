@@ -32,15 +32,23 @@ if($type==2)
 
 	$sql3="delete from subject where task_id=".$task_id;
 	//******************* sql to api  *******************//
-	$id = search_id('Subject', 'task_id', $task_id);
-	$url = 'http:/120.77.42.242:8080/Entity/U9527f52303e3e/gt/Subject';
-	$output = delete_fun($url,$id);
+	$subject = search_recorder('Subject', 'task_id', $task_id);
+	if(count($subject) >0){
+		$url1 = 'http:/120.77.42.242:8080/Entity/U9527f52303e3e/gt/Subject';
+		foreach($subject AS $uniqid => $row)
+			$output = delete_fun($url1,$row['id']);
+		
+	}
+
 
 	$sql4="delete from answers where task_id=".$task_id;
     //******************* sql to api  *******************//
-	$id = search_id('Answers', 'task_id', $task_id);
-	$url = 'http:/120.77.42.242:8080/Entity/U9527f52303e3e/gt/Answers';
-	$output = delete_fun($url,$id);
+	$answers = search_recorder('Answers', 'task_id', $task_id);
+	if(count($answers) >0){
+		$url2 = 'http:/120.77.42.242:8080/Entity/U9527f52303e3e/gt/Answers';
+		foreach($answers AS $uniqid => $row)
+			$output = delete_fun($url2,$row['id']);
+	}
 
 
 	echo "<script language='javascript'>alert('删除成功');location.href='mission_list.php';</script>";

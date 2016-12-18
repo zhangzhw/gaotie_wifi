@@ -103,9 +103,8 @@ if ($_SERVER['REQUEST_METHOD']=='POST')
 		$sql="select * from resoure_tb";
 		//$result=exec_select_sql($sql);
     	//******************* sql to api  *******************//
-   		$table = 'Resource_tb';
-   		$result = get_table($table);
-
+		$table = 'Resoure_tb';
+		$result = get_table($table);
 		echo json_encode($result);
 	}
 	elseif ($data["type"]==5)//告诉我哪个任务已经完成了 {"type":"5","device_id":"dec110","past_use":"0","task_id":"3"}

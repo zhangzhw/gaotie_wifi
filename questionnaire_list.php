@@ -60,7 +60,6 @@ for($i=0;$i<count($result);$i++)
 	//******************* sql to api  *******************//
 	$temp = search_recorder_double('Answers', 'task_id', $task_id,'subject_id', $result[$i]["subject_id"]);
     $answers = $temp;
-
 	$final_index=array();
 	$final_num=array();
 ?>
@@ -79,7 +78,8 @@ for($i=0;$i<count($result);$i++)
 		$chose_num=0;
 		for($k=0;$k<count($answers);$k++)
 		{
-			if(strpos($answers[$k]["answer"],$subject[$j]["option_id"])||($answers[$k]["answer"]==$subject[$j]["option_id"]))
+
+			if(strpos($answers[$k]["answer"],(string)$subject[$j]["option_id"])||($answers[$k]["answer"]==$subject[$j]["option_id"]))
 			{
 				
 				$chose_num++;

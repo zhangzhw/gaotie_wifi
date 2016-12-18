@@ -2,7 +2,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>流量查询</title>
-<?php require_once 'conn.php'; ?>
+<?php 
+require_once 'conn.php'; 
+require_once 'api/get_methods.php';
+?>
 </head>
 
 <body>
@@ -21,7 +24,10 @@
  
   <?php
 	  $sql="select * from device_history";
-	  $result=exec_select_sql($sql);
+	  //$result=exec_select_sql($sql);
+	  $table = 'Device_history';
+	  $result = get_table($table);
+	  
 	  $rowscount=count($result);
 	 for($i=0;$i<$rowscount;$i++)
 	 {
