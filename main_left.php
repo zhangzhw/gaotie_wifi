@@ -29,7 +29,7 @@
 
 		d.add(0,-1,'');
 		d.add(1,0,'authority','','设备管理 ',"","","","","","","","open");
-		d.add(2,0,'authority','','资源管理 ');
+		d.add(2,0,'authority','','资源任务管理 ');
 		
 		d.add(11,1,'authority','','设备流量监控 ',"","","bandwidth_query.php");
 		d.add(12,1,'authority','','历史接入设备查看',"","","bandwidth_past.php");

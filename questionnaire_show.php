@@ -33,7 +33,6 @@ $result = $temp;
 	<td  style="width: 20%">题目</td>
 	<td  style="width: 20%">题目类型</td>
 	<td>选项</td>
-	<td>统计数据</td>
 </tr>
 <?php 
 for($i=0;$i<count($result);$i++)
@@ -83,24 +82,12 @@ for($i=0;$i<count($result);$i++)
 				$chose_num++;
 			}
 		}
-		$final_index[]=$subject[$j]["option_id"];
-		$final_num[]=$chose_num;
+
 		
 	}
 	?>
 	</td>
-	<td>
-	<?php 
-	for($j=0;$j<count($final_index);$j++)
-	{
-		echo $final_index[$j]."有".$final_num[$j]."人选择";
-		if($j<count($final_index)-1)
-			echo "<br />";
-	}
-	
-	
-	?>
-	</td>
+
 	
 	
 </tr>

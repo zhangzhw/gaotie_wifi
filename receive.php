@@ -51,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD']=='POST')
 			echo json_encode($ret);
 		}
 	}
-	elseif ($data["type"]==2)//获取任务列表
+	elseif ($data["type"]==2)//获取任务列表   {"type":"2","device_id":"dec110"}
 	{
 		$device_id=$data["device_id"];
 		$sql="select * from task_table where task_id not in (select task_id from task_done where device_id='".$device_id."')";
@@ -59,26 +59,32 @@ if ($_SERVER['REQUEST_METHOD']=='POST')
 		//******************* sql to api  *******************//
 		$done = search_recorder('Task_done', 'device_id', $device_id);
 
-		$task = search_recorder('Task_table', 'task_id', $task_id);
+		$task = get_table('Task_table');
 
 		$result;
-
-	function isinArray($data, $array, $col){ 
-      foreach($array AS $uniqid => $row)  {
-        if($row[$col] == $data[$col]){
-          return 1;
-        }     
-      }
-      return 0;
-	}	
 		
-     	foreach($task AS $uniqid => $row)  
-     	{
-     		if(!isinArray($row, $done, 'task_id'))
-     		{
-     			$result[]=$row;
-     		}    		
-     	}
+		function isinArray($data, $array, $col){
+			foreach($array AS $uniqid => $row)  {
+				if($row[$col] == $data[$col]){
+					return 1;
+				}
+			}
+			return 0;
+		}
+		
+		if(count($done)>0)
+		{
+
+	     	foreach($task AS $uniqid => $row)  
+	     	{
+	     		if(!isinArray($row, $done, 'task_id'))
+	     		{
+	     			$result[]=$row;
+	     		}    		
+	     	}
+		}
+		else
+			$result=$task;
 
 		echo json_encode($result);
 	}
@@ -92,17 +98,17 @@ if ($_SERVER['REQUEST_METHOD']=='POST')
 
 		echo json_encode($result);
 	}
-	elseif($data["type"]==4)//获取资源列表及其地址 
+	elseif($data["type"]==4)//获取资源列表及其地址    不行，一测试就会把远端搞崩 
 	{
 		$sql="select * from resoure_tb";
 		//$result=exec_select_sql($sql);
     	//******************* sql to api  *******************//
-   		$table = 'Resource_table';
-    	$temp = get_table($table);
+   		$table = 'Resource_tb';
+   		$result = get_table($table);
 
 		echo json_encode($result);
 	}
-	elseif ($data["type"]==5)//告诉我哪个任务已经完成了
+	elseif ($data["type"]==5)//告诉我哪个任务已经完成了 {"type":"5","device_id":"dec110","past_use":"0","task_id":"3"}
 	{
 		$device_id=$data["device_id"];
 		$past_use=$data["past_use"];
@@ -118,7 +124,7 @@ if ($_SERVER['REQUEST_METHOD']=='POST')
 		$sql="select * from device where device_id='".$device_id."'";
 		//$res=exec_select_sql($sql);
 		//******************* sql to api  *******************//
-		$res = search_recorder('Device_table', 'device_id', $_POST["device_id"]);
+		$res = search_recorder('Device_table', 'device_id', $device_id);
 
 		$ret=array("left_bandwidth"=>"0","permission"=>"0");
 
@@ -149,12 +155,12 @@ if ($_SERVER['REQUEST_METHOD']=='POST')
 		
 		echo json_encode($ret);
 	}
-	elseif($data["type"]==6)//告诉离开了
+	elseif($data["type"]==6)//告诉离开了 {"type":"6","device_id":"dec110","past_use":"0"}
 	{
 		$device_id=$data["device_id"];
 		$past_use=$data["past_use"];
 		$sql="select * from device where device_id='".$device_id."'";
-		$result=exec_select_sql($sql);
+
 		//******************* sql to api  *******************//
 		$result = search_recorder('Device_table', 'device_id', $device_id);
 
@@ -177,7 +183,7 @@ if ($_SERVER['REQUEST_METHOD']=='POST')
 
 		echo json_encode($ret);
 	}
-	elseif ($data["type"]==7)//抢红包
+	elseif ($data["type"]==7)//抢红包 {"type":"7","device_id":"dec110","past_use":"0"}
 	{
 		$device_id=$data["device_id"];
 		$past_use=$data["past_use"];

@@ -67,7 +67,10 @@ function go(){
 <?php
 if($over==1)
 {
-	echo $_SESSION["device_id"]."欢迎参加本次调查问卷，您已获得流量".$_SESSION["bandwidth"]."B，你的权限已提高".$_SESSION["priority"]."个等级";
+?>
+<h3 style="text-align: center">欢迎参加本次调查问卷</h3>
+<?php 
+	echo "您已获得流量".$_SESSION["bandwidth"]."B，你的权限已提高".$_SESSION["priority"]."个等级";
 	$insert_data=$_SESSION["insert_data"];
 	$timestamp=time();
 	$sql="";
@@ -81,8 +84,15 @@ if($over==1)
 		{
 			$sql=$sql.",('".$_SESSION["device_id"]."',".$insert_data[$i]["task_id"].",".$insert_data[$i]["subject_id"].",'".$insert_data[$i]["answer"]."','".$timestamp."')";
 		}
+		
+		$url = 'http:/120.77.42.242:8080/Entity/U9527f52303e3e/gt/Answers';
+		
+		$data = array("device_id" => $_SESSION["device_id"], "task_id" => $insert_data[$i]["task_id"], "subject_id" => $insert_data[$i]["subject_id"], "answer" => $insert_data[$i]["answer"]);
+		
+		$output = post_fun($url,$data);
+		
 	}
-	exec_upt_sql($sql) ;
+	//exec_upt_sql($sql) ;
 
 	
 	
@@ -94,12 +104,12 @@ if($over==1)
 
   			$url = 'http:/120.77.42.242:8080/Entity/U9527f52303e3e/gt/Device_table';
   			$result['left_bandwidth'] += (int)$_SESSION["bandwidth"];
-  			$result['permission'] += (int)$permission;
+  			$result['permission'] += (int)$_SESSION["priority"];
 
   			$output = put_fun($url,$result['id'],$result);
 
 	$sql="insert into task_done values(".$insert_data[0]["task_id"].",'".$_SESSION["device_id"]."')";
-	exec_upt_sql($sql) ;
+	//exec_upt_sql($sql) ;
 			//******************* sql to api  *******************//
 			$url = 'http:/120.77.42.242:8080/Entity/U9527f52303e3e/gt/Task_done';
 
@@ -132,7 +142,20 @@ else
 	if($task_type!="文本框")
 	{
 		$sql="select * from subject where task_id=".$task_id." and subject_id=".$subject_id." order by option_id";
-		$subject=exec_select_sql($sql);
+		
+		//$subject=exec_select_sql($sql);
+		//******************* sql to api  *******************//
+		$temp = search_recorder_double('Subject', 'task_id', $task_id,'subject_id', $subject_id);
+		//if($result[$i]['type'] != '文本框'){
+			//SORT_DESC
+			$arrSort = array();
+			foreach($temp AS $uniqid => $row)
+				foreach($row AS $key=>$value)
+					$arrSort[$key][$uniqid] = $value;
+					array_multisort($arrSort['option_id'], SORT_ASC,$temp); //排序顺序标志 SORT_DESC 降序；SORT_ASC 升序
+					//$subject = $temp;
+		//}
+		$subject = $temp;
 	}	
 ?>
 <form action=<?php echo "mobile_questionnaire.php?data=".json_encode($data)."&index=".($index+1); ?>  method="post">

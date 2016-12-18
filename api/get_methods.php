@@ -12,6 +12,7 @@ function get_table($table){//
     $result = $temple[$table];
 	return $result;
 }
+// var_dump(get_table('Resource_tb'));
 
 function search_recorder($table, $row, $value){//
 	if($table == null)

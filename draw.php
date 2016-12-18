@@ -85,11 +85,11 @@ $shuju_yanse_int++;
 }
 //标注数据柱上方数据值
 for($i=0;$i<count($shuju);$i++){
-imagestring ( $image, 1, $zuo+$jiange+$i*($kuan+$jiange)+2,$shang+($img_gao-$shang-$xia)-$zhugaodu[$i]-10,$shuju[$i], $zuobiao_yanse);
+imagestring ( $image, 1, $zuo+$jiange+$i*($kuan+$jiange)+$kuan/2,$shang+($img_gao-$shang-$xia)-$zhugaodu[$i]-10,$shuju[$i], $zuobiao_yanse);
 }
 
 for($i=0;$i<count($shuju);$i++){
-	imagestring ( $image, 1, $zuo+$jiange+$i*($kuan+$jiange)+$kuan/2,$img_gao-20,$i, $zuobiao_yanse);
+	imagestring ( $image, 1, $zuo+$jiange+$i*($kuan+$jiange)+$kuan/2,$img_gao-20,$i+1, $zuobiao_yanse);
 }
 
 header('Content-type: image/png');
