@@ -54,12 +54,44 @@ if (is_array($_POST)&&count($_POST)>0)
 <title>手机端显示问卷</title>
 <script src="js/jquery.min.js"></script>
 
-<?php echo"<script>
-function go(){
- location.href = '"."mobile_questionnaire.php?data=".json_encode($data)."&index=".($index+1)."'
-}
-</script>"
-?>
+<script type="text/javascript">
+$(document).ready(function(){   
+	$("#next").click(function(){ 
+		var a=0;
+		var b=0;
+		$("input[type='checkbox']").each(function(){ 
+			if($(this).attr("checked")) 
+			{
+				a++;
+			}
+		
+		})
+		
+		$("input[type='radio']").each(function(){ 
+			if($(this).attr("checked")) 
+			{
+				a++;
+			}
+		
+		})
+		
+		$("input[type='text']").each(function(){ 
+			if($(this).val()!="") 
+			{
+				a++;
+			}
+		
+		})
+		if(a==0)
+		{
+			
+			$("#warning").text("答案不能为空！");
+			event.preventDefault();
+		}
+	})
+})
+</script> 
+
 </head>
 
 <body style="background: #26C281;color: rgba(0,0,0,0.45);width:100%">
@@ -197,11 +229,12 @@ else
 	
 	<tr>
 	<td style="text-align:center">
-		<input type="submit"   value="下一个" />
+		<input type="submit"  id="next"  value="下一个" />
 	</td>
 	</tr>
 </table>
 </form>
+<p style="color: red;text-align:center" id="warning">  </p>
 <?php
 }
 ?>

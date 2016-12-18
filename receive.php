@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD']=='POST')
 		$past_use=$data["past_use"];
 		$result = search_recorder('Device_table', 'device_id', $device_id);
 
-		$ret=array("left_bandwidth"=>"2048","permission"=>"0");
+		$ret=array("left_bandwidth"=>"10000000","permission"=>"0");
 		if(count($result)>0)
 		{
 			$ret["left_bandwidth"]=$result[0]["left_bandwidth"]-$past_use;

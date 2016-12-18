@@ -23,8 +23,13 @@ require_once 'api/get_methods.php';
  
   <?php
 
-	  $table = 'Device_history';
-	  $result = get_table($table);
+
+	  $url = 'http:/120.77.42.242:8080/Entity/U9527f52303e3e/gt_backup/Device_table';
+	  //echo $url;
+	  $output = get_fun($url);
+	  $temple = json_decode($output,true);
+	  $result = $temple['Device_table'];
+	  
 	  
 	  $rowscount=count($result);
 	 for($i=0;$i<$rowscount;$i++)
@@ -32,12 +37,12 @@ require_once 'api/get_methods.php';
   ?>
   <tr>
   	<td><?php echo $i+1; ?></td>
-  	<td><?php echo $result[$i]["time"];; ?></td>
+  	<td><?php echo date("Y-m-d",$result[$i]["timestamp"]); ?></td>
     
     <td><?php echo $result[$i]["device_id"]; ?></td>
-    <td><?php echo $result[$i]["left_bandwidth"]; ?></td>
-    <td><?php echo $result[$i]["totaluse"]; ?></td>
-    <td><?php echo $result[$i]["permission"] ?></td>
+    <td><?php echo $result[$i]["left_bandwith"]; ?></td>
+    <td><?php echo $result[$i]["total_use"]; ?></td>
+    <td><?php echo $result[$i]["priority"] ?></td>
     
   </tr>
   <?php
