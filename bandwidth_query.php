@@ -3,7 +3,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="refresh" content="10"/>
 <title>流量查询</title>
-<?php require_once 'conn.php';
+<?php
       require_once 'api/get_methods.php';
  ?>
 </head>
@@ -22,9 +22,7 @@
   </tr>
  
   <?php
-	  $sql="select * from device order by ison desc";
-	  //$result=exec_select_sql($sql);
-    //******************* sql to api  *******************//
+
     $table = 'Device_table';
     $temp = get_table($table);
     //SORT_DESC

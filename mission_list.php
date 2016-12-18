@@ -2,7 +2,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>任务查询</title>
-<?php require_once 'conn.php'; 
+<?php 
   require_once 'api/get_methods.php';
 ?>
 </head>
@@ -22,9 +22,6 @@
   </tr>
  
   <?php
-	  $sql="select * from task_table";
-	  //$result=exec_select_sql($sql);
-    //******************* sql to api  *******************//
     $table = 'Task_table';
     $temp = get_table($table);
     //SORT_DESC

@@ -1,5 +1,5 @@
 <?php
-require_once 'conn.php';
+require_once 'api/post_func.php';
 function getname($exname){
 	$dir = "resource/adviertisement/public/";
 	$i=1;
@@ -25,9 +25,11 @@ if (is_array($_POST)&&count($_POST)>0)
 	$exname=strtolower(substr($_FILES["file"]["name"],(strrpos($_FILES["file"]["name"],'.')+1)));	
 	$uploadfile = getname($exname);	
 	move_uploaded_file($_FILES["file"]["tmp_name"],$uploadfile);
-	$sql="insert into ad_table(task_id,url) values(".$task_id.",'".$uploadfile."')";
-// 	echo $sql;
-	exec_upt_sql($sql);
+
+	$url = 'http:/120.77.42.242:8080/Entity/U9527f52303e3e/gt/Ad_table';
+	$data = array("task_id" => (int)$task_id, "url" => $uploadfile);
+	$output = post_fun($url,$data);
+
 	echo "<script>javascript:alert('添加成功,点击确定返回。');location.href='mission_add.php';</script>";
 }
 ?>

@@ -3,7 +3,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>流量查询</title>
 <?php 
-require_once 'conn.php'; 
 require_once 'api/get_methods.php';
 ?>
 </head>
@@ -23,8 +22,7 @@ require_once 'api/get_methods.php';
   </tr>
  
   <?php
-	  $sql="select * from device_history";
-	  //$result=exec_select_sql($sql);
+
 	  $table = 'Device_history';
 	  $result = get_table($table);
 	  

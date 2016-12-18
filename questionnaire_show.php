@@ -1,5 +1,4 @@
 <?php
-require_once 'conn.php';
 require_once 'api/get_methods.php';
 
 $task_id;
@@ -9,9 +8,7 @@ if (is_array($_GET)&&count($_GET)>0)
 	$task_id=$_GET["task_id"];
 	$task_name=$_GET["task_name"];
 }
-$sql="select * from questionnaire where task_id=".$task_id;
-//$result=exec_select_sql($sql);
-//******************* sql to api  *******************//
+
 $temp = search_recorder('Questionnaire', 'task_id', $task_id);
 $result = $temp;
 ?>
@@ -37,9 +34,7 @@ $result = $temp;
 <?php 
 for($i=0;$i<count($result);$i++)
 {
-	$sql="select * from subject where task_id=".$task_id." and subject_id=".$result[$i]["subject_id"]." order by 'option_id'";
-	//$subject=exec_select_sql($sql);
-	//******************* sql to api  *******************//
+
 	$temp = search_recorder_double('Subject', 'task_id', $task_id,'subject_id', $result[$i]["subject_id"]);
     //$subject = $temp;
     if($result[$i]['type'] != '文本框'){
@@ -52,10 +47,6 @@ for($i=0;$i<count($result);$i++)
    		//$subject = $temp;
     }
     $subject = $temp;
-
-	$sql="select * from answers where task_id=".$task_id." and subject_id=".$result[$i]["subject_id"];
-	//$answers=exec_select_sql($sql);
-	//******************* sql to api  *******************//
 	$temp = search_recorder_double('Answers', 'task_id', $task_id,'subject_id', $result[$i]["subject_id"]);
     $answers = $temp;
 	$final_index=array();

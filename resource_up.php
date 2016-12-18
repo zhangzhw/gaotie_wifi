@@ -1,5 +1,4 @@
 <?php
-require_once 'conn.php';
 require_once 'api/post_func.php';
 
 function getname($exname){
@@ -30,10 +29,7 @@ if (is_array($_POST)&&count($_POST)>0)
 	$resource_name=$_POST["resource_name"];
 	$priority=$_POST["priority"];
 	
-	$sql="insert into resoure_tb(res_id,url,res_name,priority) values(NULL,'".$uploadfile."','".$resource_name."',".$priority.")";
-	//echo $sql;
-	//if(exec_upt_sql($sql))
-	//******************* sql to api  *******************//
+
 	$url = 'http:/120.77.42.242:8080/Entity/U9527f52303e3e/gt/Resoure_tb';
 	$filename = "resid.txt";
     $handle = fopen($filename, "r");  
@@ -41,14 +37,13 @@ if (is_array($_POST)&&count($_POST)>0)
     fclose($handle);
 
 	$res_id += 1;
-	$data = array("res_id" => $res_id, "url" => $uploadfile, "res_name" => $resource_name, "priority" => $priority );
+	$data = array("res_id" => (int)$res_id, "url" => $uploadfile, "res_name" => $resource_name, "priority" => (int)$priority );
     $handle = fopen($filename, "w");
     $output = fwrite($handle, $res_id);    
     fclose($handle);
 
 	$output = post_fun($url,$data);
 
-	 //echo "<script>javascript:alert('添加成功。');location.href='resource_up.php';</script>";
 }
 ?>
 

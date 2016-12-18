@@ -1,5 +1,4 @@
 <?php
-require_once 'conn.php';
 require_once 'api/get_methods.php';
 require_once 'api/post_func.php';
 
@@ -9,13 +8,10 @@ if (is_array($_GET)&&count($_GET)>0)
 {
 	$task_id=$_GET["task_id"];
 	$task_name=$_GET["task_name"];
-// 	echo $task_name;
 }
 if (is_array($_POST)&&count($_POST)>0)
 {
-	$sql="select subject_id from questionnaire where task_id=".$task_id;
-	//$result=exec_select_sql($sql);
-	//******************* sql to api  *******************//
+
 	$temp = search_recorder('Questionnaire', 'task_id', $task_id);
 	$result = $temp;
 
@@ -39,41 +35,25 @@ if (is_array($_POST)&&count($_POST)>0)
 		if(!empty($_POST["option6"])) $option[]=$_POST["option6"];
 		if(!empty($_POST["option7"])) $option[]=$_POST["option7"];
 		
-		$sql="insert into questionnaire(task_id,subject_id,subject_name,type) values(".$task_id.",".$id_new.",'".$_POST["subject_name"]."','".$_GET["subject_type"]."')";
-		//exec_upt_sql($sql);
-		//******************* sql to api  *******************//
+
 		$url = 'http:/120.77.42.242:8080/Entity/U9527f52303e3e/gt/Questionnaire';
 		$data = array("task_id" => (int)$task_id, "subject_id" => (int)$id_new, "subject_name" => $_POST["subject_name"], "type" => $_GET["subject_type"]);
 		$output = post_fun($url,$data);
 
 		for($i=0;$i<count($option);$i++)
 		{
-		/*
-			if($i==0)
-			{
-				$sql="insert into subject(task_id,subject_id,option_id,option_detail) values(".$task_id.",".$id_new.",".($i+1).",'".$option[$i]."')";
-			}
-			else
-			{
-				$sql=$sql.",(".$task_id.",".$id_new.",".($i+1).",'".$option[$i]."')";
-			}
-			*/
 			$url = 'http:/120.77.42.242:8080/Entity/U9527f52303e3e/gt/Subject';
 			$data = array("task_id" => (int)$task_id, "subject_id" => (int)$id_new, "option_id" => (int)($i+1), "option_detail" => $option[$i]);
 			$output = post_fun($url,$data);
 		}
-		//if(exec_upt_sql($sql))
 			echo "<script>javascript:alert('添加成功，请继续添加题目。');location.href='questionnaire_add.php?task_id=".$task_id."&task_name=".$task_name."';</script>";
 	}
 	elseif ($_GET["ctype"]==2)
 	{
-		$sql="insert into questionnaire(task_id,subject_id,subject_name,type) values(".$task_id.",".$id_new.",'".$_POST["subject_name"]."','文本框')";
-		//******************* sql to api  *******************//
 		$url = 'http:/120.77.42.242:8080/Entity/U9527f52303e3e/gt/Questionnaire';
 		$data = array("task_id" => (int)$task_id, "subject_id" => (int)$id_new, "subject_name" => $_POST["subject_name"], "type" => '文本框');
 		$output = post_fun($url,$data);
-		//if(exec_upt_sql($sql))
-			echo "<script>javascript:alert('添加成功，请继续添加题目。');location.href='questionnaire_add.php?task_id=".$task_id."&task_name=".$task_name."';</script>";
+		echo "<script>javascript:alert('添加成功，请继续添加题目。');location.href='questionnaire_add.php?task_id=".$task_id."&task_name=".$task_name."';</script>";
 	}
 	
 }

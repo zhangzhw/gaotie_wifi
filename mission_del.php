@@ -1,5 +1,4 @@
 <?php
-require_once 'conn.php';
 require_once 'api/delete_func.php';
 require_once 'api/get_methods.php';
 

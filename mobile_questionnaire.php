@@ -1,5 +1,4 @@
 <?php
-require_once 'conn.php';
 require_once 'api/get_methods.php';
 require_once 'api/post_func.php';
 require_once 'api/put_func.php';
@@ -73,18 +72,9 @@ if($over==1)
 	echo "您已获得流量".$_SESSION["bandwidth"]."B，你的权限已提高".$_SESSION["priority"]."个等级";
 	$insert_data=$_SESSION["insert_data"];
 	$timestamp=time();
-	$sql="";
 	for($i=0;$i<count($insert_data);$i++)
 	{
-		if($i==0)
-		{
-			$sql="insert into answers(device_id,task_id,subject_id,answer,time) values('".$_SESSION["device_id"]."',".$insert_data[$i]["task_id"].",".$insert_data[$i]["subject_id"].",'".$insert_data[$i]["answer"]."','".$timestamp."')";
-		}
-		else
-		{
-			$sql=$sql.",('".$_SESSION["device_id"]."',".$insert_data[$i]["task_id"].",".$insert_data[$i]["subject_id"].",'".$insert_data[$i]["answer"]."','".$timestamp."')";
-		}
-		
+
 		$url = 'http:/120.77.42.242:8080/Entity/U9527f52303e3e/gt/Answers';
 		
 		$data = array("device_id" => $_SESSION["device_id"], "task_id" => $insert_data[$i]["task_id"], "subject_id" => $insert_data[$i]["subject_id"], "answer" => $insert_data[$i]["answer"]);
@@ -92,30 +82,21 @@ if($over==1)
 		$output = post_fun($url,$data);
 		
 	}
-	//exec_upt_sql($sql) ;
 
-	
-	
-	$sql="update device set left_bandwidth=left_bandwidth+".$_SESSION["bandwidth"].",permission=permission+".$_SESSION["priority"]." where device_id='".$_SESSION["device_id"]."'";
-	//exec_upt_sql($sql) ;
-			//******************* sql to api  *******************//
-  			$temp = search_recorder('Device_table', 'device_id', $_SESSION["device_id"]);
-  			$result = $temp[0];
+  		$temp = search_recorder('Device_table', 'device_id', $_SESSION["device_id"]);
+  		$result = $temp[0];
 
-  			$url = 'http:/120.77.42.242:8080/Entity/U9527f52303e3e/gt/Device_table';
-  			$result['left_bandwidth'] += (int)$_SESSION["bandwidth"];
-  			$result['permission'] += (int)$_SESSION["priority"];
+  		$url = 'http:/120.77.42.242:8080/Entity/U9527f52303e3e/gt/Device_table';
+  		$result['left_bandwidth'] += (int)$_SESSION["bandwidth"];
+  		$result['permission'] += (int)$_SESSION["priority"];
 
-  			$output = put_fun($url,$result['id'],$result);
+  		$output = put_fun($url,$result['id'],$result);
 
-	$sql="insert into task_done values(".$insert_data[0]["task_id"].",'".$_SESSION["device_id"]."')";
-	//exec_upt_sql($sql) ;
-			//******************* sql to api  *******************//
-			$url = 'http:/120.77.42.242:8080/Entity/U9527f52303e3e/gt/Task_done';
+		$url = 'http:/120.77.42.242:8080/Entity/U9527f52303e3e/gt/Task_done';
 
-			$data = array("task_id" => $insert_data[0]["task_id"], "device_id" => $_SESSION["device_id"]);
+		$data = array("task_id" => $insert_data[0]["task_id"], "device_id" => $_SESSION["device_id"]);
 
-			$output = post_fun($url,$data);
+		$output = post_fun($url,$data);
 
 	
 	if(isset($_SESSION["task_name"]))
@@ -141,10 +122,6 @@ else
 	$task_type=$data[$index]["type"];
 	if($task_type!="文本框")
 	{
-		$sql="select * from subject where task_id=".$task_id." and subject_id=".$subject_id." order by option_id";
-		
-		//$subject=exec_select_sql($sql);
-		//******************* sql to api  *******************//
 		$temp = search_recorder_double('Subject', 'task_id', $task_id,'subject_id', $subject_id);
 		//if($result[$i]['type'] != '文本框'){
 			//SORT_DESC

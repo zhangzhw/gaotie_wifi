@@ -1,5 +1,4 @@
 <?php 
-require_once 'conn.php';
 require_once 'api/get_methods.php';
 require_once 'api/put_func.php';
 
@@ -10,8 +9,6 @@ if (is_array($_GET)&&count($_GET)>0)
 }
 if (is_array($_POST)&&count($_POST)>0)
 {
-	$sql="update task_table  set task_name='".$_POST["task_name"]."',bandwidth=".$_POST["bandwidth"].",priority=".$_POST["priority"]." where task_id=".$task_id;
-	//******************* sql to api  *******************//
   $temp = search_recorder('Task_table', 'task_id', $task_id);
   $result = $temp[0];
 
@@ -25,9 +22,6 @@ if (is_array($_POST)&&count($_POST)>0)
   echo "<script>javascript:alert('修改成功!');location.href='mission_list.php';</script>";
 
 }
-$sql="select * from task_table where task_id=".$task_id;
-//$result=exec_select_sql($sql);
-//******************* sql to api  *******************//
 $result = search_recorder('Task_table', 'task_id', $task_id);
 ?>
 

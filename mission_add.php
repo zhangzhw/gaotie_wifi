@@ -1,11 +1,8 @@
 <?php
-require_once 'conn.php';
 require_once 'api/post_func.php';
 if (is_array($_POST)&&count($_POST)>0)
 {
-	$sql="insert into task_table(task_id,task_name,bandwidth,priority,type) values(NULL,'".$_POST["task_name"]."',".$_POST["bandwidth"].",".$_POST["priority"].",".$_POST["type"].")";
-	//exec_upt_sql($sql);
-	//******************* sql to api  *******************//
+
 	$url = 'http:/120.77.42.242:8080/Entity/U9527f52303e3e/gt/Task_table';
 	$filename = "taskid.txt";
     $handle = fopen($filename, "r");  
@@ -19,11 +16,6 @@ if (is_array($_POST)&&count($_POST)>0)
     fclose($handle);
 
 	$output = post_fun($url,$data);
-
-	$sql="select * from task_table where task_name='".$_POST["task_name"]."'";
-	//$result=exec_select_sql($sql);
-	//******************* sql to api  *******************//
-	//$result = search_recorder('Task_table', 'task_name', $_POST["task_name"];
 
 	if($_POST["type"]==1)
 	 	echo "<script>javascript:alert('添加成功，请继续添加题目。');location.href='questionnaire_add.php?task_id=".$task_id."&task_name=".$_POST["task_name"]."';</script>";

@@ -7,7 +7,6 @@ function post_fun($url,$data){//
 		return 0;
 	if($data == null)
 		return 0;
-	//echo $url;
 	$data_string = json_encode($data);
 	$ch = curl_init($url);                                                                      
 	curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');                                                                     
